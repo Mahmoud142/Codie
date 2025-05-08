@@ -22,7 +22,7 @@ app.use('/api/courses', coursesRouter);
 
 // Root route for plain text message
 app.get('/', (req, res) => {
-    res.send('Welcome to the Course Management API!');
+    res.send('Welcome to the Course Management API! made by Mahmoud:)');
 });
 
 app.listen(PORT, () => {
