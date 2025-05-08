@@ -12,7 +12,7 @@ app.use(express.json());
 const mongoose = require('mongoose');
 mongoose.connect(URI).then(() => {
     console.log("Connected to MongoDB");
-}).catch((err) => { 
+}).catch((err) => {
     console.log(err);
 });
 
@@ -20,6 +20,10 @@ mongoose.connect(URI).then(() => {
 const coursesRouter = require('./routes/courses.route');
 app.use('/api/courses', coursesRouter);
 
+// Root route for plain text message
+app.get('/', (req, res) => {
+    res.send('Welcome to the Course Management API!');
+});
 
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
