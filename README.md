@@ -32,6 +32,8 @@ A RESTful API for managing courses built with Node.js, Express, and MongoDB.
     price: Number (required),
     image: String (optional),
     startDate: Date (optional),
-    endDate: Date (optional)
+    endDate: Date (optional),
+    createdAt: Date (automatically set),
+    updatedAt: Date (automatically updated)
 }
 ``` 
