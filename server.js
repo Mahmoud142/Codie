@@ -4,17 +4,40 @@ const PORT = process.env.PORT || 3000;
 require('dotenv').config();
 const cors = require('cors');
 app.use(cors());
-const URI = process.env.URI;
-
-// Middleware
 app.use(express.json());
 
+
+const URI = process.env.URI;
 // connect to mongodb
 const mongoose = require('mongoose');
-mongoose.connect(URI).then(() => {
-    console.log("Connected to MongoDB");
-}).catch((err) => {
-    console.log(err);
+
+// MongoDB connection options
+const options = {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    serverSelectionTimeoutMS: 5000,
+    socketTimeoutMS: 45000,
+};
+
+// Function to connect to MongoDB
+const connectDB = async () => {
+    try {
+        await mongoose.connect(URI, options);
+        console.log("Connected to MongoDB");
+    } catch (err) {
+        console.error("MongoDB connection error:", err);
+        // Don't exit the process, just log the error
+    }
+};
+// Connect to MongoDB
+connectDB();
+// Handle connection errors
+mongoose.connection.on('error', (err) => {
+    console.error('MongoDB connection error:', err);
+});
+mongoose.connection.on('disconnected', () => {
+    console.log('MongoDB disconnected');
+    connectDB();
 });
 
 // routes
