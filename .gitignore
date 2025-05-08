@@ -1,11 +1,3 @@
-# Dependencies
-node_modules/
 
-# Environment variables
+node_modules
 .env
-
-# IDE
-.vscode/
-
-# Logs
-*.log 
